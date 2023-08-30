@@ -27,9 +27,3 @@ def write_normalized_grayscale(img: np.ndarray, outfile: str, depth: int = 8):
 
   cv.imwrite(outfile, denorm)
 
-
-def main():
-  img = load_normalized_grayscale('picture.tiff')
-  write_normalized_grayscale(img, 'picture-clone.tiff')
-
-if __name__ == '__main__': main()
