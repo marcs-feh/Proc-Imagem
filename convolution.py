@@ -9,4 +9,8 @@ def convolution(img: np.ndarray, mask: np.ndarray) -> np.ndarray:
   ok = (mask.shape[0] < img.shape[0]) and (mask.shape[1] < img.shape[1]) and valid_mask_shape(mask)
   assert ok
 
-  return img.copy()
+  
+
+  res = img.copy()
+
+  return res

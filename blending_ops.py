@@ -11,20 +11,20 @@ def clamp(min, x, max):
 def add_img(imgA: np.ndarray, imgB: np.ndarray) -> np.ndarray:
   assert imgA.shape == imgB.shape
   res = imgA.copy()
-  for li, _ in enumerate(res):
-    for co, _ in enumerate(res[li]):
-      pxA, pxB = res[li][co], imgB[li][co]
-      res[li][co] = clamp(0.0, pxA + pxB, 1.0)
+  for row, _ in enumerate(res):
+    for col, _ in enumerate(res[row]):
+      pxA, pxB = res[row][col], imgB[row][col]
+      res[row][col] = clamp(0.0, pxA + pxB, 1.0)
 
   return res
 
 def mul_img(imgA: np.ndarray, imgB: np.ndarray) -> np.ndarray:
   assert imgA.shape == imgB.shape
   res = imgA.copy()
-  for li, _ in enumerate(res):
-    for co, _ in enumerate(res[li]):
-      pxA, pxB = res[li][co], imgB[li][co]
-      res[li][co] = clamp(0.0, pxA * pxB, 1.0)
+  for row, _ in enumerate(res):
+    for col, _ in enumerate(res[row]):
+      pxA, pxB = res[row][col], imgB[row][col]
+      res[row][col] = clamp(0.0, pxA * pxB, 1.0)
 
   return res
 
