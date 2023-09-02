@@ -24,9 +24,7 @@ def convolution(img: np.ndarray, mask: np.ndarray) -> np.ndarray:
   for row in range(N, HEIGHT - N):
     for col in range(N, WIDTH - N):
       slice = border_img[(row-N):(row+N+1), (col-N):(col+N+1)]
-      if slice.shape != (3,3):
-        print(f'({row}, {col}) -> {slice}')
-      total = np.sum(mask * slice)
+      total = np.clip(0, np.sum(mask * slice), 1.0)
       res[row - N, col - N] = total
 
 

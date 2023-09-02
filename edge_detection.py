@@ -1,5 +1,4 @@
 from convolution import convolution
-from utils import clamp_img
 import numpy as np
 
 def edge_detection(img: np.ndarray) -> np.ndarray:
@@ -15,6 +14,6 @@ def edge_detection(img: np.ndarray) -> np.ndarray:
 
   res_h = convolution(img, horizontal) ** 2
   res_v = convolution(img, vertical) ** 2
-  res = clamp_img(np.sqrt(res_h + res_v))
+  res = np.clip(0.0, np.sqrt(res_h + res_v), 1.0)
   return res
 
