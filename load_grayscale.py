@@ -6,6 +6,7 @@ import numpy as np
 def load_normalized_grayscale(path: str, depth: int = 8) -> np.ndarray:
   img = cv.imread(path, cv.IMREAD_GRAYSCALE)
   N = np.float32((2 ** depth) - 1)
+
   def normalize(n: np.float32):
     return n / N
 
