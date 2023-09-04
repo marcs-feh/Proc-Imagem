@@ -17,14 +17,28 @@ def load_normalized_grayscale(path: str, depth: int = 8) -> np.ndarray:
 
   return norm
 
-def write_normalized_grayscale(img: np.ndarray, outfile: str, depth: int = 8):
-  N = np.float32((2 ** depth) - 1)
+def write_normalized_grayscale(img: np.ndarray, outfile: str, depth: float|int = 8):
+  max_val = np.float32((2 ** depth) - 1)
 
   def denormalize(n: np.float32):
-    return np.floor(n * N)
+    return np.floor(n * max_val)
 
   denormalizev = np.vectorize(denormalize)
-  denorm = denormalizev(img).astype(np.uint8) # TODO: This ignores depth, add an if-else or something
+
+  denorm = denormalizev(img)
+  if depth == 8:
+    denorm = denorm.astype(np.uint8)
+  elif depth == 16:
+    denorm = denorm.astype(np.uint16)
+  elif depth == 32:
+    denorm = denorm.astype(np.uint32)
+  elif depth <= 8:
+    frac = 255 / max_val
+    denorm = (denorm * frac).astype(np.uint8)
+  else:
+    assert False, "Unsupported depth"
 
   cv.imwrite(outfile, denorm)
+
+
 
