@@ -20,8 +20,8 @@ def main():
   for i in range(start, img_count):
     n = i * (8.0/240)
     p = f'{i:08}'
-    # write_normalized_grayscale(img, f'out/img/{p}.tiff', n)
-    # print(f'image {p}')
+    write_normalized_grayscale(img, f'out/img/{p}.tiff', n)
+    print(f'image {p}')
     save_img_histogram(img_denormalize(img, n), f'out/hist/{p}')
     print(f'histogram {p}')
 
