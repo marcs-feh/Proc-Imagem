@@ -33,6 +33,7 @@ def write_normalized_grayscale(img: np.ndarray, outfile: str, depth: float|int =
   elif depth == 32:
     denorm = denorm.astype(np.uint32)
   elif depth <= 8:
+    if depth == 0: max_val = np.float32(1)
     frac = 255 / max_val
     denorm = (denorm * frac).astype(np.uint8)
   else:

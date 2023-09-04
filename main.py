@@ -7,10 +7,16 @@ from noise import img_gaussian_noise
 def main():
   path = 'touhou_weed.tiff'
   img = load_normalized_grayscale(path)
-  # res = img_gaussian_noise(img, 0.2, 0);
-  # res = edge_detection(res)
-  #
+  res = img_gaussian_noise(img, 0.2, 0);
+  res = edge_detection(res)
+  write_normalized_grayscale(res, 'conv.out.tiff')
+
   # save_img_histogram(img, 'hist.out')
-  write_normalized_grayscale(img, 'chan.out.tiff', 1.2)
+  # img_count = 240
+  # for i in range(0, img_count):
+  #   n = i * (8.0/img_count)
+  #   p = f'out/{i:08}.tiff'
+  #   write_normalized_grayscale(img, p, n)
+  #   print(f'wrote {p}')
 
 if __name__ == '__main__': main()

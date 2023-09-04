@@ -1,4 +1,5 @@
 __pycache__
 out.*
+out/
 *.out.*
 touhou_weed*
