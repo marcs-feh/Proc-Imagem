@@ -1,5 +1,9 @@
 mkdir -p out/hist out/img
 
+# Render with 4 threads
+{ python main.py 0 60 & python main.py 60 120 & python main.py 120 180 & python main.py 180 240; }
+
+
 for f in out/img/*tiff; do
 	convert "$f" "$(echo $f | sed 's:tiff:png:')"
 	echo "$f -> $(echo $f | sed 's:tiff:png:')"
