@@ -1,4 +1,5 @@
-from load_grayscale import write_img_grayscale, load_img_grayscale
+from image_properties import img_mse, img_psnr
+from load_grayscale import img_denormalize, write_img_grayscale, load_img_grayscale
 from convolution import convolution
 from edge_detection import edge_detection
 from histogram import save_img_histogram
@@ -27,10 +28,21 @@ def demo():
     mean, std_dev = 0, 0.3
     print(f'Applying gaussian noise (mean: {mean}, std_dev:{std_dev}) to "{name}"...  ', end='')
     out = img_gaussian_noise(img, mean, std_dev)
+
+
     path = format_filename(name, 'noise')
     noisy_images[path] = out
     write_img_grayscale(out, path)
     print(f'Wrote {path}')
+
+    d_og = img_denormalize(img)
+    d_noise = img_denormalize(out)
+
+    mse = img_mse(d_og, d_noise)
+    psnr = img_psnr(d_og, d_noise)
+    print( f'Stats of {path}:\n'
+          +f'  MSE: {mse}\n'
+          +f'  PSNR: {psnr}\n')
 
   print('===== BLUR =====')
   for name, img in noisy_images.items():
@@ -39,6 +51,15 @@ def demo():
     path = format_filename(name, 'blur')
     write_img_grayscale(out, path)
     print(f'Wrote {path}')
+
+    d_og = img_denormalize(img)
+    d_noise = img_denormalize(out)
+
+    mse = img_mse(d_og, d_noise)
+    psnr = img_psnr(d_og, d_noise)
+    print( f'Stats of {path}:\n'
+          +f'  MSE: {mse}\n'
+          +f'  PSNR: {psnr}\n')
 
 
 def main():
