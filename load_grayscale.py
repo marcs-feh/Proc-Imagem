@@ -3,7 +3,7 @@
 import cv2 as cv
 import numpy as np
 
-def load_normalized_grayscale(path: str, depth: int = 8) -> np.ndarray:
+def load_img_grayscale(path: str, depth: int = 8) -> np.ndarray:
   img = cv.imread(path, cv.IMREAD_GRAYSCALE)
   N = np.float32((2 ** depth) - 1)
 
@@ -39,7 +39,7 @@ def img_denormalize(img: np.ndarray, depth: float|int = 8) -> np.ndarray:
 
   return denorm
 
-def write_normalized_grayscale(img: np.ndarray, outfile: str, depth: float|int = 8):
+def write_img_grayscale(img: np.ndarray, outfile: str, depth: float|int = 8):
   out = img_denormalize(img, depth)
   cv.imwrite(outfile, out)
 
